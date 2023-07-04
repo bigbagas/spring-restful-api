@@ -47,4 +47,11 @@ public class AuthService {
     private Long next30days(){
         return System.currentTimeMillis() +(1000 * 16 * 24 * 30);
     }
+
+    public void logout (User user){
+        user.setUsername(null);
+        user.setTokenExpiredAt(null);
+
+        userRepository.save(user);
+    }
 }
