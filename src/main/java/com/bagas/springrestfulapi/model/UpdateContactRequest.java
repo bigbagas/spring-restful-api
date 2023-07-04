@@ -1,5 +1,6 @@
 package com.bagas.springrestfulapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -8,11 +9,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
 @Data
-public class CreateContactRequest {
+@Builder
+public class UpdateContactRequest {
+
+    @JsonIgnore
+    @NotBlank
+    private String id;
 
     @NotBlank
     @Size(max = 100)
@@ -27,4 +32,6 @@ public class CreateContactRequest {
 
     @Size(max = 100)
     private String phone;
+
+
 }
