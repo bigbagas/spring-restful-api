@@ -17,8 +17,6 @@ public class Address {
     @Id
     private String id;
 
-    @Column(name = "contact_id")
-    private String contactId;
 
     private String street;
 
