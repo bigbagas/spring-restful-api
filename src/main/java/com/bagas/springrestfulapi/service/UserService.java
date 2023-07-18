@@ -27,6 +27,10 @@ public class UserService {
     public void register (RegisterUserRequest request){
         validationService.validate(request);
 
+        if (userRepository.existsById(request.getUsername())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Username already registered");
+        }
+
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(BCrypt.hashpw(request.getPassword(),BCrypt.gensalt()));
@@ -50,7 +54,7 @@ public class UserService {
         validationService.validate(request);
 
         if (Objects.nonNull(request.getPassword())){
-            user.setPassword(request.getPassword());
+            user.setPassword(BCrypt.hashpw(request.getPassword(),BCrypt.gensalt()));
         }
 
         if (Objects.nonNull(request.getName())){
